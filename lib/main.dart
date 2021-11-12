@@ -42,6 +42,9 @@ class Inicio extends StatefulWidget {
   _InicioState createState() => _InicioState();
 }
 
+//variable para control del mensaje de alerta
+bool _valoralerta = false;
+
 class _InicioState extends State<Inicio> {
   @override
   Widget build(BuildContext context) {
@@ -66,7 +69,11 @@ class _InicioState extends State<Inicio> {
               const SizedBox(
                 height: 100,
               ),
-              const Text("Si"),
+              //condicion ternaria que evalua el valor de _valoralerta()
+              //para mostrar un mensaje u otro
+              //si es true mues con alerta si es false muestr sin alerta
+              Text(_valoralerta ? "Con Alerta" : "Sin Alerta",
+                  style: const TextStyle(fontSize: 20)),
             ],
           ),
         ));
@@ -94,6 +101,7 @@ void _mostrarAlerta(BuildContext context) {
         TextButton(
             onPressed: () {
               print("No");
+              _valoralerta = false;
               //navigator es para navegar entre ventanas
               //pop para volver a la anterior
               Navigator.pop(context);
@@ -102,6 +110,7 @@ void _mostrarAlerta(BuildContext context) {
         TextButton(
             onPressed: () {
               print("si");
+              _valoralerta = !_valoralerta;
               Navigator.pop(context);
             },
             child: const Text("Si"))
